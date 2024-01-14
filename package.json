@@ -1,0 +1,29 @@
+{
+	"name": "raxis-utils",
+	"private": true,
+	"scripts": {
+		"build": "turbo build",
+		"dev": "turbo dev",
+		"lint": "turbo lint",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\""
+	},
+	"devDependencies": {
+		"@config/eslint": "*",
+		"@config/ts": "*",
+		"@types/eslint": "^8",
+		"@yarnpkg/pnpify": "^4.0.1",
+		"eslint": "^8.56.0",
+		"prettier": "^3.2.1",
+		"tsup": "^8.0.1",
+		"turbo": "latest",
+		"typescript": "^5.3.3"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"packageManager": "yarn@4.0.2",
+	"workspaces": [
+		"config/*",
+		"packages/*"
+	]
+}
