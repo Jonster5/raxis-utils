@@ -4,13 +4,15 @@
 	"scripts": {
 		"build": "turbo build",
 		"dev": "turbo dev",
-		"lint": "turbo lint",
-		"format": "prettier --write \"**/*.{ts,tsx,md}\""
+		"test": "turbo test",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"publish-packages": "turbo run build test && changeset version && changeset publish"
 	},
 	"devDependencies": {
-		"@config/eslint": "*",
 		"@config/ts": "*",
 		"@types/eslint": "^8",
+		"@typescript-eslint/eslint-plugin": "^6.18.1",
+		"@typescript-eslint/parser": "^6.18.1",
 		"@yarnpkg/pnpify": "^4.0.1",
 		"eslint": "^8.56.0",
 		"prettier": "^3.2.1",
@@ -25,5 +27,8 @@
 	"workspaces": [
 		"config/*",
 		"packages/*"
-	]
+	],
+	"dependencies": {
+		"@changesets/cli": "^2.27.1"
+	}
 }

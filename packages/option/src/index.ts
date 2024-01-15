@@ -72,11 +72,11 @@ export class None implements Option<never> {
 		return fn();
 	}
 
-	*[Symbol.iterator]() {
-		return;
+	[Symbol.iterator](): Iterator<never> {
+		return undefined as never;
 	}
 
-	some(_: (value: never) => void): this {
+	some(): this {
 		return this;
 	}
 
@@ -85,7 +85,7 @@ export class None implements Option<never> {
 		return this;
 	}
 
-	map(_: (value: never) => NonNull | undefined | null): Option<never> {
+	map(): Option<never> {
 		return this;
 	}
 
@@ -120,7 +120,7 @@ export class Some<T extends NonNull = NonNull> implements Option<T> {
 		return false;
 	}
 
-	expect(_: string): T {
+	expect(): T {
 		return this.value;
 	}
 
@@ -128,11 +128,11 @@ export class Some<T extends NonNull = NonNull> implements Option<T> {
 		return this.value;
 	}
 
-	unwrapOr(_: T): T {
+	unwrapOr(): T {
 		return this.value;
 	}
 
-	unwrapOrElse(_: () => T): T {
+	unwrapOrElse(): T {
 		return this.value;
 	}
 
@@ -145,7 +145,7 @@ export class Some<T extends NonNull = NonNull> implements Option<T> {
 		return this;
 	}
 
-	none(_: () => void) {
+	none() {
 		return this;
 	}
 
@@ -153,11 +153,11 @@ export class Some<T extends NonNull = NonNull> implements Option<T> {
 		return wrap(fn(this.value));
 	}
 
-	mapOr<R extends {}>(fn: (value: T) => R | null | undefined, _: R): Option<R> {
+	mapOr<R extends NonNull>(fn: (value: T) => R | null | undefined): Option<R> {
 		return wrap(fn(this.value));
 	}
 
-	mapOrElse<R extends {}>(fn: (value: T) => R | null | undefined, _: () => R | undefined | null): Option<R> {
+	mapOrElse<R extends NonNull>(fn: (value: T) => R | null | undefined): Option<R> {
 		return wrap(fn(this.value));
 	}
 
@@ -176,13 +176,38 @@ type MappedInnerValue<A extends Option<NonNull>[]> = {
 	[K in keyof A]: A[K] extends Option<infer I> ? I : never;
 };
 
+/** Gets the type of the value contained within an Option */
 export type Unwrapped<T> = T extends Option<infer I> ? I : T;
 
+/**
+ * Converts a group of separate Options into a single Option that exists only of all of the contained Options exist
+ *
+ * @param options An array of Options
+ * @returns An option containing a tuple of all the contained values in the same order as the input options
+ *
+ * @example
+ * ```ts
+ * declare const o1: Option<number>
+ * declare const o2: Option<string>
+ *
+ * const o3 = all([o1, o2]) // Option<[number, string]>
+ * ```
+ */
 export function all<T extends [...Option<NonNull>[]]>(options: [...T]): Option<MappedInnerValue<T>> {
 	if (options.some((o) => o.isNone())) return none;
 	return some(options.map((o) => o.unwrap()) as MappedInnerValue<T>);
 }
 
+/**
+ * Takes in any unknown value and returns an Option containing that value
+ *
+ * @example
+ * ```ts
+ * const val = localStorage.getItem("someKey") // string | undefined
+ *
+ * const opt = wrap(val) // Option<string>
+ * ```
+ */
 export function wrap<T extends NonNull>(value: T | undefined | null): Option<T> {
 	if (value === undefined || value === null) {
 		return None.value;

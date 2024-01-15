@@ -1,0 +1,24 @@
+{
+	"env": {
+		"browser": true,
+		"es2022": true,
+		"node": true
+	},
+	"root": true,
+	"extends": ["eslint:recommended", "plugin:@typescript-eslint/strict-type-checked"],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": true,
+		"tsconfigRootDir": "./",
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": ["@typescript-eslint"],
+	"rules": {
+		"indent": ["error", "tab"],
+		"linebreak-style": ["error", "windows"],
+		"quotes": ["error", "single"],
+		"semi": ["error", "always"],
+		"@typescript-eslint/unified-signatures": "off"
+	}
+}

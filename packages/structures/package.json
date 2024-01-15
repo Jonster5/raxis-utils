@@ -1,10 +1,9 @@
 {
-	"name": "@raxis/option",
-	"description": "Simple and fast Option type",
+	"name": "@raxis/structures",
+	"description": "Data structures used in the Raxis engine",
 	"author": "Jonster5",
 	"scripts": {
-		"build": "tsup",
-		"test": "vitest run"
+		"build": "tsup"
 	},
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
@@ -30,6 +29,9 @@
 			"esm",
 			"cjs"
 		],
-		"minify": true
+		"minify": true,
+		"external": [
+			"@raxis/option"
+		]
 	}
 }
