@@ -1,7 +1,9 @@
 {
 	"name": "@raxis/structures",
+	"version": "0.0.0",
 	"description": "Data structures used in the Raxis engine",
 	"author": "Jonster5",
+	"license": "MIT",
 	"scripts": {
 		"build": "tsup"
 	},
