@@ -1,12 +1,11 @@
 {
-	"name": "raxis-utils",
 	"private": true,
 	"scripts": {
 		"build": "turbo build",
 		"dev": "turbo dev",
 		"test": "turbo test",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
-		"publish-packages": "turbo run build test && changeset version && changeset publish"
+		"publish": "turbo run build test && yarn publish raxis"
 	},
 	"devDependencies": {
 		"@config/ts": "*",
@@ -26,9 +25,7 @@
 	"packageManager": "yarn@4.0.2",
 	"workspaces": [
 		"config/*",
-		"packages/*"
-	],
-	"dependencies": {
-		"@changesets/cli": "^2.27.1"
-	}
+		"utils/*",
+		"raxis"
+	]
 }

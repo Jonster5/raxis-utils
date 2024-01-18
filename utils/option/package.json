@@ -1,0 +1,15 @@
+{
+	"name": "option",
+	"private": true,
+	"author": "Jonster5",
+	"main": "src/index.ts",
+	"scripts": {
+		"test": "vitest run",
+		"dev": "vitest"
+	},
+	"devDependencies": {
+		"@config/ts": "workspace:*",
+		"typescript": "^5.3.3",
+		"vitest": "1.2.0"
+	}
+}

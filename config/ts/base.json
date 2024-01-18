@@ -30,5 +30,5 @@
 		"forceConsistentCasingInFileNames": true
 	},
 
-	"exclude": ["dist/**/*"]
+	"exclude": ["**/dist/**/*", "**/*.test.ts"]
 }
